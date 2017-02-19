@@ -1,6 +1,14 @@
 {
   "name": "SmarttNursery",
+	"description": "SmartNursery test",
+ 	"author": "James Smartt <james.smartt@gmail.com>",
   "version": "0.0.1",
+	"private": true,
+	"repository": {
+  	"type": "git",
+  	"url": "https://github.com/getsmartt/SmarttNursery"
+	},
+
   "scripts": {
     "tsc": "tsc",
     "tsc:w": "tsc -w",
@@ -13,6 +21,7 @@
     "webpack": "webpack --watch",
     "lint": "eslint --ext .js ./config ./app ./*.js"
   },
+
   "dependencies": {
     "@angular/common": "^2.4.7",
     "@angular/compiler": "^2.4.7",
@@ -47,6 +56,7 @@
     "systemjs": "0.20.9",
     "zone.js": "0.7.7"
   },
+	
   "devDependencies": {
     "awesome-typescript-loader": "3.0.4",
     "concurrently": "3.3.0",
