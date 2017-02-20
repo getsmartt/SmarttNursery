@@ -2,28 +2,63 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// fixthis Define a new 'PlantMasterSchema'
+//add references to subdocuments
+const Reviews = require('./review.subdoc.server.model');
+const Documents = require('./document.subdoc.server.model');
+const Notes = require('./note.subdoc.server.model');
+
+// Define a new 'PlantMasterSchema'
 const PlantMasterSchema = new Schema({
-    created: {
-        type: Date,
-        default: Date.now
-    },
-    title: {
+
+    plantlistid: String,
+    majorgroup: String,
+    family: String,
+    genushybridmarker: String,
+    genus: String,
+    specieshybridmarker: String,
+    species: String,
+    infraspecificrank: String,
+    infraspecificepithet: String,
+    cultivar: [{
+        name: String,
+        tradename: String,
+        patentnumber: String,
+        description: String,
+        supplier: [{supplierid: String}],
+        customer: [{customerid: String}],
+        review: [Reviews],
+        document: [Documents],
+        note: [Notes]
+    }],
+    propagation:[{
         type: String,
-        default: '',
-        trim: true,
-        required: 'Title cannot be blank'
-    },
-    content: {
+        method: String,
+        reference: String
+    }],
+    characteristic: [{
         type: String,
-        default: '',
-        trim: true
-    },
-    creator: {
-        type: Schema.ObjectId,
-        ref: 'User'
-    }
+        value: String,
+        reference: String
+    }]
 });
+
+// Set the 'scientificname' virtual property fixthis so null values are ignored in name.
+PlantMasterSchema.virtual('scientificname').get(function() {
+    return this.genushybridmarker
+        + ' ' + this.genus
+        + ' ' + this.specieshybridmarker
+        + ' ' + this.species
+        + ' ' + this.infraspecificrank
+        + ' ' + this.infraspecificepithet;
+});
+
+PlantMasterSchema.set('toJSON', { getters: true, virtuals: true });
 
 // Create the 'Article' model out of the 'ArticleSchema'
 mongoose.model('PlantMaster', PlantMasterSchema);
+
+/** Steps to complete
+ * fixthis build controllers.
+ * fixthis build routes.
+ * fixthis register routes in Express config file.
+ */
