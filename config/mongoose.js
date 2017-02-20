@@ -8,17 +8,18 @@ module.exports = function() {
 	const db = mongoose.connect(config.db);
 
 	// Load the models
-	require('../app/models/lastupdated.server.model');
 	require('../app/models/user.server.model');
 	require('../app/models/article.server.model');
 	require('../app/models/plantmaster.server.model');
 
+    // Load plugins
+    mongoose.plugin(require('../app/models/commonfield.plugin.server.model.js'));
+    // fixthis add plugin for reviews
+    // fixthis add plugin for documents
+    // fixthis add plugin for notes
+
 	// Return the Mongoose connection instance
 	return db;
-
-	mongoose.plugin(require('..app/models/commonfields.plugin.server.model'));
-	// add plugin for rfeviews
-	// add plugin for documents
-	// add plugin for notes
-
 };
+
+
