@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Define a new 'ArticleSchema'
+// fixthis Define a new 'PlantMasterSchema'
 const PlantMasterSchema = new Schema({
     created: {
         type: Date,
