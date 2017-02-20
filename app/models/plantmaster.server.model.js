@@ -19,6 +19,7 @@ const PlantMasterSchema = new Schema({
     species: String,
     infraspecificrank: String,
     infraspecificepithet: String,
+    // fixthis refactor Cultivar into subdocument
     cultivar: [{
         name: String,
         tradename: String,
